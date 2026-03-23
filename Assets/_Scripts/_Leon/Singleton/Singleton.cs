@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Leon.Core.Singleton 
+namespace Leon.Singleton 
 { 
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
@@ -12,7 +12,6 @@ namespace Leon.Core.Singleton
                 Instance = GetComponent<T>();
             else
                 Destroy(gameObject);
-
         }
     }
 }
