@@ -1,15 +1,14 @@
 using System.Linq;
 using UnityEditor;
-using UnityEngine;
 
-[CustomEditor(typeof(FSMExample))]
-public class StateMachineEditor : Editor
+[CustomEditor(typeof(Player))]
+public class PlayerEditor : Editor
 {
     public bool showFoldout;
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-        FSMExample fsm = (FSMExample)target;
+        Player fsm = (Player)target;
 
         EditorGUILayout.Space(30f);
         EditorGUILayout.LabelField("State Machine");
@@ -29,7 +28,6 @@ public class StateMachineEditor : Editor
 
                 for (int i = 0; i < keys.Length; i++)
                 {
-                    //EditorGUILayout.LabelField(string.Format("{0} :: {1}", keys[i], vals[i]));
                     EditorGUILayout.LabelField($"{keys[i]} :: {vals[i]}");
                 }
             }
