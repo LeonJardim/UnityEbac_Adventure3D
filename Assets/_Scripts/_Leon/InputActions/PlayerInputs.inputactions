@@ -88,24 +88,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "tapOn",
-                    "type": "Button",
-                    "id": "58259d73-2fab-4230-80d2-8c1e3b7dc1a4",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "tapOff",
-                    "type": "Button",
-                    "id": "38722760-9a7c-48ed-9d2f-0716cd3a7399",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "screenPosition",
                     "type": "Value",
                     "id": "5eba06d3-e4cb-4711-8576-1e53d8e345ba",
@@ -113,6 +95,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Escape",
+                    "type": "Button",
+                    "id": "fcf305e1-c15b-4d29-a57f-41d8ed6d52e7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -503,45 +494,23 @@
                 },
                 {
                     "name": "",
-                    "id": "c8327a36-6a2b-4328-8b2f-8b5a4b055e9f",
-                    "path": "<Touchscreen>/Press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "tapOn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "03515c36-28a3-45cb-8c5f-040a05d5c37a",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "tapOn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "371c8013-45bd-4ac1-a37b-9170b4bbb3c0",
-                    "path": "<Touchscreen>/Press",
-                    "interactions": "MultiTap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "tapOff",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e70b5ab2-3e60-4c4a-add0-3c2a9c24f9d7",
                     "path": "<Pointer>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "screenPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2637674b-ca8f-41ac-a7c6-38f3c1d4a75c",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Escape",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

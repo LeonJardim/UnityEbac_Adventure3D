@@ -176,24 +176,6 @@ namespace Leon.PlayerInputs
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""tapOn"",
-                    ""type"": ""Button"",
-                    ""id"": ""58259d73-2fab-4230-80d2-8c1e3b7dc1a4"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""tapOff"",
-                    ""type"": ""Button"",
-                    ""id"": ""38722760-9a7c-48ed-9d2f-0716cd3a7399"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""screenPosition"",
                     ""type"": ""Value"",
                     ""id"": ""5eba06d3-e4cb-4711-8576-1e53d8e345ba"",
@@ -201,6 +183,15 @@ namespace Leon.PlayerInputs
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""fcf305e1-c15b-4d29-a57f-41d8ed6d52e7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -591,45 +582,23 @@ namespace Leon.PlayerInputs
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c8327a36-6a2b-4328-8b2f-8b5a4b055e9f"",
-                    ""path"": ""<Touchscreen>/Press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""tapOn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""03515c36-28a3-45cb-8c5f-040a05d5c37a"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""tapOn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""371c8013-45bd-4ac1-a37b-9170b4bbb3c0"",
-                    ""path"": ""<Touchscreen>/Press"",
-                    ""interactions"": ""MultiTap"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""tapOff"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""e70b5ab2-3e60-4c4a-add0-3c2a9c24f9d7"",
                     ""path"": ""<Pointer>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""screenPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2637674b-ca8f-41ac-a7c6-38f3c1d4a75c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1226,9 +1195,8 @@ namespace Leon.PlayerInputs
             m_Player_Previous = m_Player.FindAction("Previous", throwIfNotFound: true);
             m_Player_Next = m_Player.FindAction("Next", throwIfNotFound: true);
             m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
-            m_Player_tapOn = m_Player.FindAction("tapOn", throwIfNotFound: true);
-            m_Player_tapOff = m_Player.FindAction("tapOff", throwIfNotFound: true);
             m_Player_screenPosition = m_Player.FindAction("screenPosition", throwIfNotFound: true);
+            m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1331,9 +1299,8 @@ namespace Leon.PlayerInputs
         private readonly InputAction m_Player_Previous;
         private readonly InputAction m_Player_Next;
         private readonly InputAction m_Player_Sprint;
-        private readonly InputAction m_Player_tapOn;
-        private readonly InputAction m_Player_tapOff;
         private readonly InputAction m_Player_screenPosition;
+        private readonly InputAction m_Player_Escape;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -1382,17 +1349,13 @@ namespace Leon.PlayerInputs
             /// </summary>
             public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
             /// <summary>
-            /// Provides access to the underlying input action "Player/tapOn".
-            /// </summary>
-            public InputAction @tapOn => m_Wrapper.m_Player_tapOn;
-            /// <summary>
-            /// Provides access to the underlying input action "Player/tapOff".
-            /// </summary>
-            public InputAction @tapOff => m_Wrapper.m_Player_tapOff;
-            /// <summary>
             /// Provides access to the underlying input action "Player/screenPosition".
             /// </summary>
             public InputAction @screenPosition => m_Wrapper.m_Player_screenPosition;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Escape".
+            /// </summary>
+            public InputAction @Escape => m_Wrapper.m_Player_Escape;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -1446,15 +1409,12 @@ namespace Leon.PlayerInputs
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
-                @tapOn.started += instance.OnTapOn;
-                @tapOn.performed += instance.OnTapOn;
-                @tapOn.canceled += instance.OnTapOn;
-                @tapOff.started += instance.OnTapOff;
-                @tapOff.performed += instance.OnTapOff;
-                @tapOff.canceled += instance.OnTapOff;
                 @screenPosition.started += instance.OnScreenPosition;
                 @screenPosition.performed += instance.OnScreenPosition;
                 @screenPosition.canceled += instance.OnScreenPosition;
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
             }
 
             /// <summary>
@@ -1493,15 +1453,12 @@ namespace Leon.PlayerInputs
                 @Sprint.started -= instance.OnSprint;
                 @Sprint.performed -= instance.OnSprint;
                 @Sprint.canceled -= instance.OnSprint;
-                @tapOn.started -= instance.OnTapOn;
-                @tapOn.performed -= instance.OnTapOn;
-                @tapOn.canceled -= instance.OnTapOn;
-                @tapOff.started -= instance.OnTapOff;
-                @tapOff.performed -= instance.OnTapOff;
-                @tapOff.canceled -= instance.OnTapOff;
                 @screenPosition.started -= instance.OnScreenPosition;
                 @screenPosition.performed -= instance.OnScreenPosition;
                 @screenPosition.canceled -= instance.OnScreenPosition;
+                @Escape.started -= instance.OnEscape;
+                @Escape.performed -= instance.OnEscape;
+                @Escape.canceled -= instance.OnEscape;
             }
 
             /// <summary>
@@ -1866,26 +1823,19 @@ namespace Leon.PlayerInputs
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnSprint(InputAction.CallbackContext context);
             /// <summary>
-            /// Method invoked when associated input action "tapOn" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-            /// </summary>
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnTapOn(InputAction.CallbackContext context);
-            /// <summary>
-            /// Method invoked when associated input action "tapOff" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-            /// </summary>
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnTapOff(InputAction.CallbackContext context);
-            /// <summary>
             /// Method invoked when associated input action "screenPosition" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnScreenPosition(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Escape" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnEscape(InputAction.CallbackContext context);
         }
         /// <summary>
         /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

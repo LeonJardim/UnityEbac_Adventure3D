@@ -42,7 +42,7 @@ public class PState_Run : StateBase
 
     public override void OnEnter()
     {
-
+        _player.animator.SetBool("Run", true);
     }
     public override void OnStay()
     {
@@ -52,10 +52,11 @@ public class PState_Run : StateBase
         {
             _player.stateMachine.SwitchState(Player.PlayerStates.IDLE);
         }
+
     }
     public override void OnExit()
     {
-
+        _player.animator.SetBool("Run", false);
     }
 }
 
