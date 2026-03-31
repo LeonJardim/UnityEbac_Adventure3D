@@ -1,6 +1,7 @@
 using Leon.PlayerInputs;
 using Leon.StateMachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static GameManager;
 using static UnityEngine.GridBrushBase;
 
@@ -8,7 +9,7 @@ public class Player : MonoBehaviour
 {
     #region VARIABLES
     private PlayerInputs _input;
-
+    
     [Header("References")]
     public Animator animator;
     [HideInInspector] public Camera cam;
@@ -19,11 +20,13 @@ public class Player : MonoBehaviour
     public float jumpForce = 8f;
     [SerializeField] private float _modelRotationSpeed = 8f;
     [SerializeField] private float _gravity = 10f;
-    
+
+    [Header("Abilities")]
+    public PlayerAbilityShoot abilityShoot;
+
     [Header("Inputs")]
     public Vector2 moveInput;
     public bool jumpInput;
-    public bool leftMouseInput;
     public bool escapeInput;
 
 
@@ -74,13 +77,14 @@ public class Player : MonoBehaviour
 
         _input.Player.Move.performed += i => moveInput = i.ReadValue<Vector2>();
         _input.Player.Jump.started += i => jumpInput = true;
-        _input.Player.Attack.started += i => leftMouseInput = true;
+        _input.Player.Attack.started += i => MouseClick();
         _input.Player.Escape.started += i => escapeInput = true;
-
+        _input.Player._1.performed += i => SwitchGun(0);
+        _input.Player._2.performed += i => SwitchGun(1);
 
         _input.Player.Move.canceled += i => moveInput = Vector2.zero;
         _input.Player.Jump.canceled += i => jumpInput = false;
-        _input.Player.Attack.canceled += i => leftMouseInput = false;
+        _input.Player.Attack.canceled += i => MouseUnclick();
         _input.Player.Escape.canceled += i => escapeInput = false;
     }
     #endregion
@@ -148,18 +152,27 @@ public class Player : MonoBehaviour
     #region ACTIONS
     public void HandleAllMainActionInputs()
     {
-        HandleMouseInput();
         HandleEscapeInput();
     }
 
-    private void HandleMouseInput()
+    private void MouseClick()
     {
-        if (leftMouseInput)
+        if (!mouse_captured) CaptureMouse();
+        else
         {
-            leftMouseInput = false;
-            if (!mouse_captured) CaptureMouse();
+            abilityShoot.StartShoot();
         }
     }
+    private void MouseUnclick()
+    {
+        abilityShoot.StopShoot();
+    }
+
+    private void SwitchGun(int f)
+    {
+        abilityShoot.SwitchGun(f);
+    }
+
     private void HandleEscapeInput()
     {
         if (escapeInput)
@@ -170,8 +183,16 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-
-    private void CaptureMouse() => Cursor.lockState = CursorLockMode.Locked;
-    private void ReleaseMouse() => Cursor.lockState = CursorLockMode.None;
-
+    #region MOUSE FUNCTIONS
+    private void CaptureMouse()
+    {
+        mouse_captured = true;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+    private void ReleaseMouse()
+    {
+        mouse_captured = false;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    #endregion
 }

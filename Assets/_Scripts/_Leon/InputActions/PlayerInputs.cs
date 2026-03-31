@@ -192,6 +192,24 @@ namespace Leon.PlayerInputs
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""1"",
+                    ""type"": ""Button"",
+                    ""id"": ""bd941a35-55a4-478d-a1a4-5a1ebf31c406"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""2"",
+                    ""type"": ""Button"",
+                    ""id"": ""41a787cb-044a-45a1-9ea3-2a0421e46bd6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -599,6 +617,28 @@ namespace Leon.PlayerInputs
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e5e3934f-5828-4376-9503-abb08e0f8b30"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0833595c-f2bd-463a-96b7-065aef8fe0ff"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1197,6 +1237,8 @@ namespace Leon.PlayerInputs
             m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
             m_Player_screenPosition = m_Player.FindAction("screenPosition", throwIfNotFound: true);
             m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
+            m_Player__1 = m_Player.FindAction("1", throwIfNotFound: true);
+            m_Player__2 = m_Player.FindAction("2", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1301,6 +1343,8 @@ namespace Leon.PlayerInputs
         private readonly InputAction m_Player_Sprint;
         private readonly InputAction m_Player_screenPosition;
         private readonly InputAction m_Player_Escape;
+        private readonly InputAction m_Player__1;
+        private readonly InputAction m_Player__2;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -1356,6 +1400,14 @@ namespace Leon.PlayerInputs
             /// Provides access to the underlying input action "Player/Escape".
             /// </summary>
             public InputAction @Escape => m_Wrapper.m_Player_Escape;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/_1".
+            /// </summary>
+            public InputAction @_1 => m_Wrapper.m_Player__1;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/_2".
+            /// </summary>
+            public InputAction @_2 => m_Wrapper.m_Player__2;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -1415,6 +1467,12 @@ namespace Leon.PlayerInputs
                 @Escape.started += instance.OnEscape;
                 @Escape.performed += instance.OnEscape;
                 @Escape.canceled += instance.OnEscape;
+                @_1.started += instance.On_1;
+                @_1.performed += instance.On_1;
+                @_1.canceled += instance.On_1;
+                @_2.started += instance.On_2;
+                @_2.performed += instance.On_2;
+                @_2.canceled += instance.On_2;
             }
 
             /// <summary>
@@ -1459,6 +1517,12 @@ namespace Leon.PlayerInputs
                 @Escape.started -= instance.OnEscape;
                 @Escape.performed -= instance.OnEscape;
                 @Escape.canceled -= instance.OnEscape;
+                @_1.started -= instance.On_1;
+                @_1.performed -= instance.On_1;
+                @_1.canceled -= instance.On_1;
+                @_2.started -= instance.On_2;
+                @_2.performed -= instance.On_2;
+                @_2.canceled -= instance.On_2;
             }
 
             /// <summary>
@@ -1836,6 +1900,20 @@ namespace Leon.PlayerInputs
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnEscape(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void On_1(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void On_2(InputAction.CallbackContext context);
         }
         /// <summary>
         /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

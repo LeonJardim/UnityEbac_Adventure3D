@@ -1438,6 +1438,7 @@ GameObject:
   - component: {fileID: 4864417287953415091}
   - component: {fileID: 7387206352164734489}
   - component: {fileID: 6309183665396075313}
+  - component: {fileID: 2643057752851856532}
   m_Layer: 0
   m_Name: PFB_Player
   m_TagString: Untagged
@@ -1453,12 +1454,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6832856673638186202}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 418, y: -7.55513, z: 44.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9050854733080854806}
+  - {fileID: 2906728570240998997}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &7387206352164734489
@@ -1503,13 +1505,32 @@ MonoBehaviour:
   characterController: {fileID: 0}
   moveSpeed: 20
   jumpForce: 2
-  _camRotationSpeed: 2
+  _modelRotationSpeed: 8
   _gravity: 5
+  abilityShoot: {fileID: 2643057752851856532}
   moveInput: {x: 0, y: 0}
   jumpInput: 0
-  leftMouseInput: 0
   escapeInput: 0
   mouse_captured: 0
+--- !u!114 &2643057752851856532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6832856673638186202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2937a5bf33eb92f4c87848da73f787e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAbilityShoot
+  uIGunUpdaters:
+  - {fileID: 0}
+  preFabGuns:
+  - {fileID: 3984987064282881539, guid: 1f7db533b298c8941b9f5f9afe151547, type: 3}
+  - {fileID: 7675124360391364169, guid: 36dd9b320cae107429a6f04689bd21ee, type: 3}
+  myGuns: []
+  gunPosition: {fileID: 2906728570240998997}
 --- !u!1 &6921192882705789829
 GameObject:
   m_ObjectHideFlags: 0
@@ -2147,6 +2168,37 @@ SkinnedMeshRenderer:
     m_Center: {x: -1.6127157, y: 0.026337802, z: 0.14625666}
     m_Extent: {x: 1.0634916, y: 0.9725501, z: 1.0316166}
   m_DirtyAABB: 0
+--- !u!1 &8393933388940759643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2906728570240998997}
+  m_Layer: 0
+  m_Name: GunContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2906728570240998997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8393933388940759643}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4864417287953415091}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8561563625104530348
 GameObject:
   m_ObjectHideFlags: 0
