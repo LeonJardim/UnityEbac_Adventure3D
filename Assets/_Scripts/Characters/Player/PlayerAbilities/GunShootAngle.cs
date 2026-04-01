@@ -19,7 +19,7 @@ public class GunShootAngle : GunShootLimit
             var obj = Instantiate(projectile, positionToShoot);
 
             obj.transform.localPosition = Vector3.zero;
-            obj.transform.localEulerAngles = Vector3.up * (i % 2 == 0 ? angle : -angle) * mult;
+            obj.transform.localEulerAngles = (i % 2 == 0 ? angle : -angle) * mult * Vector3.up;
             obj.speed = speed;
             obj.transform.parent = null;
         }

@@ -18,11 +18,8 @@ public class ProjectileBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        var enemy = collision.transform.GetComponent<HealthBase>();
-        if (enemy != null)
-        {
-            enemy.TakeDamage(damage);
-        }
+        var damageable = collision.transform.GetComponent<IDamageable>();
+        damageable?.Damage(damage);
         Destroy(gameObject);
     }
 }

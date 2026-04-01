@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     [Header("Speeds")]
     public float moveSpeed = 2f;
     public float jumpForce = 8f;
-    [SerializeField] private float _modelRotationSpeed = 8f;
+    [SerializeField] private float _modelRotationSpeed = 13f;
     [SerializeField] private float _gravity = 10f;
 
     [Header("Abilities")]

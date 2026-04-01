@@ -1505,7 +1505,7 @@ MonoBehaviour:
   characterController: {fileID: 0}
   moveSpeed: 20
   jumpForce: 2
-  _modelRotationSpeed: 8
+  _modelRotationSpeed: 15
   _gravity: 5
   abilityShoot: {fileID: 2643057752851856532}
   moveInput: {x: 0, y: 0}
@@ -1526,11 +1526,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAbilityShoot
   uIGunUpdaters:
   - {fileID: 0}
+  gunPosition: {fileID: 2906728570240998997}
   preFabGuns:
   - {fileID: 3984987064282881539, guid: 1f7db533b298c8941b9f5f9afe151547, type: 3}
   - {fileID: 7675124360391364169, guid: 36dd9b320cae107429a6f04689bd21ee, type: 3}
   myGuns: []
-  gunPosition: {fileID: 2906728570240998997}
 --- !u!1 &6921192882705789829
 GameObject:
   m_ObjectHideFlags: 0
