@@ -4,17 +4,17 @@ namespace Leon.StateMachine
 {
     public class StateBase
     {
-        public virtual void OnEnter()
+        public virtual void OnEnter(params object[] objs)
         {
-            Debug.Log("State Enter");
+
         }
         public virtual void OnStay()
         {
-            Debug.Log("State Stay");
+
         }
         public virtual void OnExit()
         {
-            Debug.Log("State Exit");
+
         }
     }
 }

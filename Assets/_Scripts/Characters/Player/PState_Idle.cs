@@ -10,7 +10,7 @@ public class PState_Idle : StateBase
         _player = player;
     }
 
-    public override void OnEnter()
+    public override void OnEnter(params object[] objs)
     {
         
     }
@@ -40,7 +40,7 @@ public class PState_Run : StateBase
         _player = player;
     }
 
-    public override void OnEnter()
+    public override void OnEnter(params object[] objs)
     {
         _player.animator.SetBool("Run", true);
     }
@@ -71,7 +71,7 @@ public class PState_Dead : StateBase
         _player = player;
     }
 
-    public override void OnEnter()
+    public override void OnEnter(params object[] objs)
     {
 
     }

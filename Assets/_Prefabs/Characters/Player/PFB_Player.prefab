@@ -608,6 +608,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4109293954106626790}
   - component: {fileID: 3226029582425189533}
+  - component: {fileID: 4243541758213322174}
   m_Layer: 0
   m_Name: MDL_Techboy_Visor
   m_TagString: Untagged
@@ -713,6 +714,22 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.02535522, y: 1.2268125, z: 0.52126795}
     m_Extent: {x: 1.1060412, y: 0.6710254, z: 0.8163298}
   m_DirtyAABB: 0
+--- !u!114 &4243541758213322174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2898810719269968652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc37369537a47543a8ad4530659f7a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashColor
+  meshRenderer: {fileID: 0}
+  skinnedMeshRenderer: {fileID: 3226029582425189533}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.15
 --- !u!1 &3043643164226453859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,6 +1091,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8163162690767482019}
   - component: {fileID: 5485577287580311855}
+  - component: {fileID: 1166220877095309287}
   m_Layer: 0
   m_Name: MDL_Techboy_Body
   m_TagString: Untagged
@@ -1189,6 +1207,22 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.50381285, y: -0.00043201447, z: 0.3858031}
     m_Extent: {x: 1.4045672, y: 1.3139147, z: 0.7327688}
   m_DirtyAABB: 0
+--- !u!114 &1166220877095309287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4885388906812650868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc37369537a47543a8ad4530659f7a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashColor
+  meshRenderer: {fileID: 0}
+  skinnedMeshRenderer: {fileID: 5485577287580311855}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.15
 --- !u!1 &5090840545885025303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1437,11 +1471,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4864417287953415091}
   - component: {fileID: 7387206352164734489}
+  - component: {fileID: 6214672460723018343}
   - component: {fileID: 6309183665396075313}
+  - component: {fileID: 776448963310468104}
   - component: {fileID: 2643057752851856532}
   m_Layer: 0
   m_Name: PFB_Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1488,6 +1524,29 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!136 &6214672460723018343
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6832856673638186202}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.98
+  m_Height: 3.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.65, z: 0}
 --- !u!114 &6309183665396075313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1512,6 +1571,28 @@ MonoBehaviour:
   jumpInput: 0
   escapeInput: 0
   mouse_captured: 0
+--- !u!114 &776448963310468104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6832856673638186202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24a4619e92e3af6438ff42259968f47e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBase
+  startingLife: 10
+  delayToKill: 1
+  isDead: 0
+  _flashColor: {fileID: 0}
+  _flashColors:
+  - {fileID: 1166220877095309287}
+  - {fileID: 8918199556012179456}
+  - {fileID: 3036860520792267719}
+  - {fileID: 4243541758213322174}
+  _particleSystem: {fileID: 0}
 --- !u!114 &2643057752851856532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1572,6 +1653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1532024753861235880}
   - component: {fileID: 686341294578734564}
+  - component: {fileID: 8918199556012179456}
   m_Layer: 0
   m_Name: MDL_Techboy_Body.lp
   m_TagString: Untagged
@@ -1668,6 +1750,22 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.34033918, y: -0.00034451485, z: -0.025605977}
     m_Extent: {x: 0.47282922, y: 0.5586463, z: 0.39656973}
   m_DirtyAABB: 0
+--- !u!114 &8918199556012179456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7058346849308455948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc37369537a47543a8ad4530659f7a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashColor
+  meshRenderer: {fileID: 0}
+  skinnedMeshRenderer: {fileID: 686341294578734564}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.15
 --- !u!1 &7085074917278610054
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,6 +1912,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7283222535367381922}
   - component: {fileID: 3273439110748163345}
+  - component: {fileID: 3036860520792267719}
   m_Layer: 0
   m_Name: MDL_Techboy_Helmet.lp
   m_TagString: Untagged
@@ -1921,6 +2020,22 @@ SkinnedMeshRenderer:
     m_Center: {x: -1.7000376, y: 0.026505947, z: -0.032452226}
     m_Extent: {x: 1.1996406, y: 1.1673383, z: 1.0667708}
   m_DirtyAABB: 0
+--- !u!114 &3036860520792267719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7624286059888814220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc37369537a47543a8ad4530659f7a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashColor
+  meshRenderer: {fileID: 0}
+  skinnedMeshRenderer: {fileID: 3273439110748163345}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.15
 --- !u!1 &7781048858659989503
 GameObject:
   m_ObjectHideFlags: 0

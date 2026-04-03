@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 3315462296132751047}
   - component: {fileID: 6040253662839275207}
   m_Layer: 0
-  m_Name: PFB_Projectile
+  m_Name: PFB_ProjectileEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -219,6 +219,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileBase
   speed: 50
   lifeTime: 2
-  damage: 5
+  damage: 0
   tagsToHit:
-  - Enemy
+  - Player

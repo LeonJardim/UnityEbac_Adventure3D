@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9271c7b8d0ab9a343987e2a6eba48285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunBase
-  projectile: {fileID: 6040253662839275207, guid: 72b11099e6f27f04badd2d9f617e97ec, type: 3}
+  projectile: {fileID: 6040253662839275207, guid: 95bc199802a01074ea1a6a92deff5d67, type: 3}
   positionToShoot: {fileID: 2878970455669926514}
   fireRate: 0.3
   speed: 50
@@ -74,7 +74,7 @@ Transform:
   m_GameObject: {fileID: 8372361355315043960}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.81}
+  m_LocalPosition: {x: 0, y: 0, z: 1.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

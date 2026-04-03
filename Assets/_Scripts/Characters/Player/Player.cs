@@ -1,11 +1,9 @@
+using DG.Tweening;
 using Leon.PlayerInputs;
 using Leon.StateMachine;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using static GameManager;
-using static UnityEngine.GridBrushBase;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     #region VARIABLES
     private PlayerInputs _input;
@@ -14,6 +12,7 @@ public class Player : MonoBehaviour
     public Animator animator;
     [HideInInspector] public Camera cam;
     [HideInInspector] public CharacterController characterController;
+    private HealthBase _health;
 
     [Header("Speeds")]
     public float moveSpeed = 2f;
@@ -93,6 +92,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
+        _health = GetComponent<HealthBase>();
+        if (_health != null) _health.OnKill += OnKill;
         StateMachineInit();
     }
 
@@ -104,6 +105,22 @@ public class Player : MonoBehaviour
         ApplyMove();
     }
 
+    #region HEALTH / DAMAGE
+    public void Damage(int amount)
+    {
+        _health.TakeDamage(amount);
+    }
+    public void Damage(int amount, Vector3 dir)
+    {
+        _health.TakeDamage(amount);
+        transform.DOMove(transform.position - dir, 0.2f);
+    }
+    
+    private void OnKill()
+    {
+        _health.OnKill -= OnKill;
+    }
+    #endregion
 
     #region MOVEMENT
     private void ApplyGravity()

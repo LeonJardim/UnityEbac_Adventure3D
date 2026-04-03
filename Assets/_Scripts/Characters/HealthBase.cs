@@ -1,14 +1,15 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthBase : MonoBehaviour
 {
     public Action OnKill;
     public int startingLife = 10;
-    public float delayToKill = 1f;
     public bool isDead = false;
 
     [SerializeField] private FlashColor _flashColor;
+    [SerializeField] private List<FlashColor> _flashColors;
     [SerializeField] private ParticleSystem _particleSystem;
     private int _currentLife;
 
@@ -31,6 +32,7 @@ public class HealthBase : MonoBehaviour
         }
 
         if (_flashColor != null) _flashColor.Flash();
+        _flashColors?.ForEach(i => i.Flash());
         if (_particleSystem != null) _particleSystem.Play();
     }
 

@@ -5616,12 +5616,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6281779893053664936}
   - component: {fileID: 3072981597163709555}
+  - component: {fileID: 6267971381263159770}
   - component: {fileID: 8698701550595391027}
   - component: {fileID: 7039061820757087980}
   - component: {fileID: 141741049939317354}
   m_Layer: 3
   m_Name: PFB_MonsterSlime 02
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5663,7 +5664,34 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 3.6, y: 5.8, z: 3.4}
-  m_Center: {x: 0.34, y: 2.9, z: 0}
+  m_Center: {x: -0.32, y: 2.9, z: 0}
+--- !u!54 &6267971381263159770
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6658164316280714258}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!114 &8698701550595391027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5676,6 +5704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810688a1f7bfdc9409a9668f01fbb8ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy.EnemyBase
+  lookAtPlayer: 1
 --- !u!114 &7039061820757087980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5689,9 +5718,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBase
   startingLife: 15
-  delayToKill: 1
   isDead: 0
   _flashColor: {fileID: 0}
+  _flashColors: []
   _particleSystem: {fileID: 0}
 --- !u!114 &141741049939317354
 MonoBehaviour:
@@ -6025,6 +6054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlashColor
   meshRenderer: {fileID: 2917858464535066223}
+  skinnedMeshRenderer: {fileID: 0}
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.15
 --- !u!1 &8996436052689390839
@@ -6051,14 +6081,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8996436052689390839}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7238829542011001996}
   m_Father: {fileID: 6281779893053664936}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &9086048878277233096
 GameObject:
   m_ObjectHideFlags: 0

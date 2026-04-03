@@ -38,13 +38,13 @@ namespace Leon.StateMachine
             statesDictionary = new Dictionary<T, StateBase>();
         }
 
-        public void SwitchState(T state)
+        public void SwitchState(T state, params object[] objs)
         {
             if (_currentState != null) _currentState.OnExit();
 
             _currentState = statesDictionary[state];
 
-            _currentState.OnEnter();
+            _currentState.OnEnter(objs);
         }
     }
 }
