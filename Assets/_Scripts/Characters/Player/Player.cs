@@ -1,3 +1,4 @@
+using Animation;
 using DG.Tweening;
 using Leon.PlayerInputs;
 using Leon.StateMachine;
@@ -7,12 +8,14 @@ public class Player : MonoBehaviour, IDamageable
 {
     #region VARIABLES
     private PlayerInputs _input;
-    
+
     [Header("References")]
-    public Animator animator;
+    public Collider capCollider;
     [HideInInspector] public Camera cam;
+    [HideInInspector] public AnimationBase animationBase;
     [HideInInspector] public CharacterController characterController;
     private HealthBase _health;
+    private Vector3 _initialPosition;
 
     [Header("Speeds")]
     public float moveSpeed = 2f;
@@ -62,7 +65,6 @@ public class Player : MonoBehaviour, IDamageable
     #region AWAKE / INPUTS
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();
         PerformInputs();
     }
 
@@ -92,18 +94,22 @@ public class Player : MonoBehaviour, IDamageable
     private void Start()
     {
         cam = Camera.main;
+        animationBase = GetComponent<AnimationBase>();
+        characterController = GetComponent<CharacterController>();
         _health = GetComponent<HealthBase>();
         if (_health != null) _health.OnKill += OnKill;
+        _initialPosition = transform.position;
         StateMachineInit();
     }
 
     private void Update()
     {
-        ApplyGravity();
-        stateMachine.Update();
         HandleAllMainActionInputs();
+        stateMachine.Update();
+        ApplyGravity();
         ApplyMove();
     }
+
 
     #region HEALTH / DAMAGE
     public void Damage(int amount)
@@ -115,10 +121,27 @@ public class Player : MonoBehaviour, IDamageable
         _health.TakeDamage(amount);
         transform.DOMove(transform.position - dir, 0.2f);
     }
-    
     private void OnKill()
     {
         _health.OnKill -= OnKill;
+        stateMachine.SwitchState(PlayerStates.DEAD);
+        Invoke(nameof(Respawn), 3f);
+    }
+
+    public void Respawn()
+    {
+        _health.OnKill += OnKill;
+        _health.ResetLife();
+        stateMachine.SwitchState(PlayerStates.IDLE);
+        animationBase.PlayAnimationByTrigger(AnimationType.REVIVE);
+        if (CheckPointManager.Instance.HasCheckPoint())
+        {
+            transform.position = CheckPointManager.Instance.GetPositionFromLastCheckpoint();
+        }
+        else
+        {
+            transform.position = _initialPosition;
+        }
     }
     #endregion
 
@@ -130,6 +153,7 @@ public class Player : MonoBehaviour, IDamageable
     }
     private void ApplyMove()
     {
+        if (!characterController.enabled) return;
         _moveDirection.y = _velocity_Y;
         characterController.Move(moveSpeed * Time.deltaTime * _moveDirection);
     }

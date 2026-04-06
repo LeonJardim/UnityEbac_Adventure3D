@@ -1,5 +1,6 @@
 using UnityEngine;
 using Leon.StateMachine;
+using Animation;
 
 public class PState_Idle : StateBase
 {
@@ -12,7 +13,7 @@ public class PState_Idle : StateBase
 
     public override void OnEnter(params object[] objs)
     {
-        
+
     }
     public override void OnStay()
     {
@@ -42,7 +43,7 @@ public class PState_Run : StateBase
 
     public override void OnEnter(params object[] objs)
     {
-        _player.animator.SetBool("Run", true);
+        _player.animationBase.SetAnimationBool(AnimationType.RUN, true);
     }
     public override void OnStay()
     {
@@ -56,7 +57,7 @@ public class PState_Run : StateBase
     }
     public override void OnExit()
     {
-        _player.animator.SetBool("Run", false);
+        _player.animationBase.SetAnimationBool(AnimationType.RUN, false);
     }
 }
 
@@ -73,14 +74,22 @@ public class PState_Dead : StateBase
 
     public override void OnEnter(params object[] objs)
     {
-
+        _player.animationBase.PlayAnimationByTrigger(AnimationType.DEATH);
+        _player.capCollider.enabled = false;
+        if (_player.IsOnFloor())
+            _player.characterController.enabled = false;
     }
     public override void OnStay()
     {
-
+        if (_player.characterController.enabled)
+        {
+            if (_player.IsOnFloor() )
+                _player.characterController.enabled = false;
+        }
     }
     public override void OnExit()
     {
-
+        _player.capCollider.enabled = true;
+        _player.characterController.enabled = true;
     }
 }

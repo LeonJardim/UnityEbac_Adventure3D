@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GunShootLimit : GunBase
 {
-    public List<UIGunUpdater> uIGunUpdaters;
+    public List<UIUpdater> uIGunUpdaters;
 
     public float maxShoots = 5f;
     public float reloadTime = 1f;

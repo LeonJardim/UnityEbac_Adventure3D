@@ -1475,6 +1475,7 @@ GameObject:
   - component: {fileID: 6309183665396075313}
   - component: {fileID: 776448963310468104}
   - component: {fileID: 2643057752851856532}
+  - component: {fileID: 801962428114988984}
   m_Layer: 0
   m_Name: PFB_Player
   m_TagString: Player
@@ -1559,8 +1560,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc87c6178dcee842b7985ac3b69fe9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  animator: {fileID: 6467398283129409566}
+  capCollider: {fileID: 6214672460723018343}
   cam: {fileID: 0}
+  animationBase: {fileID: 0}
   characterController: {fileID: 0}
   moveSpeed: 20
   jumpForce: 2
@@ -1583,15 +1585,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a4619e92e3af6438ff42259968f47e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBase
-  startingLife: 10
-  delayToKill: 1
+  startingLife: 15
   isDead: 0
-  _flashColor: {fileID: 0}
+  _uiUpdater: {fileID: 0}
   _flashColors:
   - {fileID: 1166220877095309287}
   - {fileID: 8918199556012179456}
   - {fileID: 3036860520792267719}
   - {fileID: 4243541758213322174}
+  _flashColor: {fileID: 0}
   _particleSystem: {fileID: 0}
 --- !u!114 &2643057752851856532
 MonoBehaviour:
@@ -1605,13 +1607,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2937a5bf33eb92f4c87848da73f787e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAbilityShoot
-  uIGunUpdaters:
-  - {fileID: 0}
+  uIUpdaters: []
   gunPosition: {fileID: 2906728570240998997}
   preFabGuns:
   - {fileID: 3984987064282881539, guid: 1f7db533b298c8941b9f5f9afe151547, type: 3}
   - {fileID: 7675124360391364169, guid: 36dd9b320cae107429a6f04689bd21ee, type: 3}
   myGuns: []
+--- !u!114 &801962428114988984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6832856673638186202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fab6e5fb6db26f45b8f93fe07cc2375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Animation.AnimationBase
+  animator: {fileID: 6467398283129409566}
+  animationSetups: []
 --- !u!1 &6921192882705789829
 GameObject:
   m_ObjectHideFlags: 0

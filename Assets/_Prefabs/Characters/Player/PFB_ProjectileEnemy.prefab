@@ -219,6 +219,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileBase
   speed: 50
   lifeTime: 2
-  damage: 0
+  damage: 2
   tagsToHit:
   - Player

@@ -9,7 +9,8 @@ namespace Animation
         IDLE,
         RUN,
         ATTACK,
-        DEATH
+        DEATH,
+        REVIVE
     }
 
     public class AnimationBase : MonoBehaviour
@@ -23,6 +24,15 @@ namespace Animation
             if (setup != null)
             {
                 animator.SetTrigger(setup.trigger);
+            }
+        }
+
+        public void SetAnimationBool(AnimationType animationType, bool value)
+        {
+            var setup = animationSetups.Find(i => i.animationType == animationType);
+            if (setup != null)
+            {
+                animator.SetBool(setup.trigger, value);
             }
         }
     }

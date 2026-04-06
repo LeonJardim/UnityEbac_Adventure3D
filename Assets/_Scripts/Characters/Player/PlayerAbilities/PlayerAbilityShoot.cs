@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerAbilityShoot : PlayerAbility
 {
-    public List<UIGunUpdater> uIGunUpdaters;
+    public List<UIUpdater> uIUpdaters;
 
     public Transform gunPosition;
     public List<GunBase> preFabGuns;
@@ -26,7 +26,7 @@ public class PlayerAbilityShoot : PlayerAbility
             _newGun.transform.localPosition = _newGun.transform.localEulerAngles = Vector3.zero;
             if (_newGun is GunShootLimit g)
             {
-                g.uIGunUpdaters = uIGunUpdaters;
+                g.uIGunUpdaters = uIUpdaters;
             }
             myGuns.Add(_newGun);
             _newGun.enabled = false;
