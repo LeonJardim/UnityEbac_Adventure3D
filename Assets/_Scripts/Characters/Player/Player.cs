@@ -120,7 +120,13 @@ public class Player : MonoBehaviour, IDamageable
     {
         _health.TakeDamage(amount);
         transform.DOMove(transform.position - dir, 0.2f);
+        if (FXManager.Instance != null)
+        {
+            FXManager.Instance.FlashVignette();
+            FXManager.Instance.ScreenShake();
+        }
     }
+
     private void OnKill()
     {
         _health.OnKill -= OnKill;
