@@ -74,6 +74,7 @@ public class PState_Dead : StateBase
 
     public override void OnEnter(params object[] objs)
     {
+        _player.isDead = true;
         _player.animationBase.PlayAnimationByTrigger(AnimationType.DEATH);
         _player.capCollider.enabled = false;
         if (_player.IsOnFloor())
@@ -91,5 +92,6 @@ public class PState_Dead : StateBase
     {
         _player.capCollider.enabled = true;
         _player.characterController.enabled = true;
+        _player.isDead = false;
     }
 }

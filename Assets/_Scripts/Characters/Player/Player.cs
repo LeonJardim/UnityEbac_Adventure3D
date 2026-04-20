@@ -1,5 +1,6 @@
 using Animation;
 using DG.Tweening;
+using Items;
 using Leon.PlayerInputs;
 using Leon.StateMachine;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour, IDamageable
     [HideInInspector] public CharacterController characterController;
     private HealthBase _health;
     private Vector3 _initialPosition;
+    private SOInt _lifePack;
 
     [Header("Speeds")]
     public float moveSpeed = 2f;
@@ -39,6 +41,8 @@ public class Player : MonoBehaviour, IDamageable
 
     // UTILITY VARIABLES
     [HideInInspector] public bool mouse_captured = false;
+    [HideInInspector] public bool isDead = false;
+    private bool _firstTimeDamage = true;
     #endregion
 
     #region STATE MACHINE
@@ -79,6 +83,7 @@ public class Player : MonoBehaviour, IDamageable
         _input.Player.Move.performed += i => moveInput = i.ReadValue<Vector2>();
         _input.Player.Jump.started += i => jumpInput = true;
         _input.Player.Attack.started += i => MouseClick();
+        _input.Player.Item.started += i => UseLifePack();
         _input.Player.Escape.started += i => escapeInput = true;
         _input.Player._1.performed += i => SwitchGun(0);
         _input.Player._2.performed += i => SwitchGun(1);
@@ -96,6 +101,7 @@ public class Player : MonoBehaviour, IDamageable
         cam = Camera.main;
         animationBase = GetComponent<AnimationBase>();
         characterController = GetComponent<CharacterController>();
+        _lifePack = ItemManager.Instance.GetItemByType(ItemType.LIFE_PACK).soInt;
         _health = GetComponent<HealthBase>();
         if (_health != null) _health.OnKill += OnKill;
         _initialPosition = transform.position;
@@ -115,10 +121,20 @@ public class Player : MonoBehaviour, IDamageable
     public void Damage(int amount)
     {
         _health.TakeDamage(amount);
+        if (_firstTimeDamage && _lifePack.Value > 0)
+        {
+            _firstTimeDamage = false;
+            ItemManager.Instance.ShowItemTip();
+        }
     }
     public void Damage(int amount, Vector3 dir)
     {
         _health.TakeDamage(amount);
+        if (_firstTimeDamage && _lifePack.Value > 0)
+        {
+            _firstTimeDamage = false;
+            ItemManager.Instance.ShowItemTip();
+        }
         transform.DOMove(transform.position - dir, 0.2f);
         if (FXManager.Instance != null)
         {
@@ -205,6 +221,7 @@ public class Player : MonoBehaviour, IDamageable
     private void MouseClick()
     {
         if (!mouse_captured) CaptureMouse();
+        else if (isDead) return;
         else
         {
             abilityShoot.StartShoot();
@@ -213,6 +230,15 @@ public class Player : MonoBehaviour, IDamageable
     private void MouseUnclick()
     {
         abilityShoot.StopShoot();
+    }
+
+    private void UseLifePack()
+    {
+        if (_lifePack.Value > 0 && _health.currentLife < _health.startingLife)
+        {
+            ItemManager.Instance.RemoveByType(ItemType.LIFE_PACK);
+            _health.Heal(_health.startingLife / 2);
+        }
     }
 
     private void SwitchGun(int f)

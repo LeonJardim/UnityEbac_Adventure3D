@@ -125,7 +125,7 @@ namespace Leon.PlayerInputs
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""852140f2-7766-474d-8707-702459ba45f3"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
@@ -206,6 +206,15 @@ namespace Leon.PlayerInputs
                     ""name"": ""2"",
                     ""type"": ""Button"",
                     ""id"": ""41a787cb-044a-45a1-9ea3-2a0421e46bd6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""bba4542f-535e-4daf-87b3-5ea6ae58a84a"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -639,6 +648,17 @@ namespace Leon.PlayerInputs
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62a677d9-0940-460f-83e5-78e380f82570"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1239,6 +1259,7 @@ namespace Leon.PlayerInputs
             m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
             m_Player__1 = m_Player.FindAction("1", throwIfNotFound: true);
             m_Player__2 = m_Player.FindAction("2", throwIfNotFound: true);
+            m_Player_Item = m_Player.FindAction("Item", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1345,6 +1366,7 @@ namespace Leon.PlayerInputs
         private readonly InputAction m_Player_Escape;
         private readonly InputAction m_Player__1;
         private readonly InputAction m_Player__2;
+        private readonly InputAction m_Player_Item;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -1408,6 +1430,10 @@ namespace Leon.PlayerInputs
             /// Provides access to the underlying input action "Player/_2".
             /// </summary>
             public InputAction @_2 => m_Wrapper.m_Player__2;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Item".
+            /// </summary>
+            public InputAction @Item => m_Wrapper.m_Player_Item;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -1473,6 +1499,9 @@ namespace Leon.PlayerInputs
                 @_2.started += instance.On_2;
                 @_2.performed += instance.On_2;
                 @_2.canceled += instance.On_2;
+                @Item.started += instance.OnItem;
+                @Item.performed += instance.OnItem;
+                @Item.canceled += instance.OnItem;
             }
 
             /// <summary>
@@ -1523,6 +1552,9 @@ namespace Leon.PlayerInputs
                 @_2.started -= instance.On_2;
                 @_2.performed -= instance.On_2;
                 @_2.canceled -= instance.On_2;
+                @Item.started -= instance.OnItem;
+                @Item.performed -= instance.OnItem;
+                @Item.canceled -= instance.OnItem;
             }
 
             /// <summary>
@@ -1914,6 +1946,13 @@ namespace Leon.PlayerInputs
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void On_2(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Item" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnItem(InputAction.CallbackContext context);
         }
         /// <summary>
         /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

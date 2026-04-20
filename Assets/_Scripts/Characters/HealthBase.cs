@@ -6,13 +6,13 @@ public class HealthBase : MonoBehaviour
 {
     public Action OnKill;
     public int startingLife = 10;
+    public int currentLife;
     public bool isDead = false;
 
     [SerializeField] private List<UIUpdater> _uiUpdaters;
     [SerializeField] private List<FlashColor> _flashColors;
     [SerializeField] private FlashColor _flashColor;
     [SerializeField] private ParticleSystem _particleSystem;
-    private int _currentLife;
 
 
     private void Awake()
@@ -25,23 +25,35 @@ public class HealthBase : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (isDead) return;
+        if (damage <= 0) return;
 
-        _currentLife -= damage;
-        if (_currentLife <= 0 )
+        currentLife -= damage;
+        if (currentLife <= 0 )
         {
             Kill();
         }
 
-        _uiUpdaters?.ForEach(i => i.UpdateValue((float)_currentLife / startingLife));
+        _uiUpdaters?.ForEach(i => i.UpdateValue((float)currentLife / startingLife));
         if (_flashColor != null) _flashColor.Flash();
         _flashColors?.ForEach(i => i.Flash());
         if (_particleSystem != null) _particleSystem.Play();
     }
 
+    public void Heal(int heal)
+    {
+        if (isDead) return;
+        if (heal <= 0) return;
+
+        currentLife += heal;
+        if (currentLife > startingLife) currentLife = startingLife;
+        _uiUpdaters?.ForEach(i => i.UpdateValue((float)currentLife / startingLife));
+    }
+
+
     public void ResetLife()
     {
         isDead = false;
-        _currentLife = startingLife;
+        currentLife = startingLife;
         _uiUpdaters?.ForEach(i => i.UpdateValue(1f));
     }
 

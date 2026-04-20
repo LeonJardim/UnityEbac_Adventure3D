@@ -37,7 +37,7 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Hold",
                     "initialStateCheck": false
@@ -118,6 +118,15 @@
                     "name": "2",
                     "type": "Button",
                     "id": "41a787cb-044a-45a1-9ea3-2a0421e46bd6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Item",
+                    "type": "Button",
+                    "id": "bba4542f-535e-4daf-87b3-5ea6ae58a84a",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -551,6 +560,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "62a677d9-0940-460f-83e5-78e380f82570",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
