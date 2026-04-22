@@ -31,8 +31,6 @@ public class Player : MonoBehaviour, IDamageable
     [Header("Inputs")]
     public Vector2 moveInput;
     public bool jumpInput;
-    public bool escapeInput;
-
 
      // INPUT VARIABLES
     private Vector3 _moveDirection;
@@ -40,6 +38,7 @@ public class Player : MonoBehaviour, IDamageable
     private float _velocity_Y;
 
     // UTILITY VARIABLES
+    [HideInInspector] public IInteractable interactableObj;
     [HideInInspector] public bool mouse_captured = false;
     [HideInInspector] public bool isDead = false;
     private bool _firstTimeDamage = true;
@@ -83,15 +82,15 @@ public class Player : MonoBehaviour, IDamageable
         _input.Player.Move.performed += i => moveInput = i.ReadValue<Vector2>();
         _input.Player.Jump.started += i => jumpInput = true;
         _input.Player.Attack.started += i => MouseClick();
+        _input.Player.Interact.started += i => Interact();
         _input.Player.Item.started += i => UseLifePack();
-        _input.Player.Escape.started += i => escapeInput = true;
+        _input.Player.Escape.started += i => EscapeInput();
         _input.Player._1.performed += i => SwitchGun(0);
         _input.Player._2.performed += i => SwitchGun(1);
 
         _input.Player.Move.canceled += i => moveInput = Vector2.zero;
         _input.Player.Jump.canceled += i => jumpInput = false;
         _input.Player.Attack.canceled += i => MouseUnclick();
-        _input.Player.Escape.canceled += i => escapeInput = false;
     }
     #endregion
 
@@ -110,7 +109,6 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        HandleAllMainActionInputs();
         stateMachine.Update();
         ApplyGravity();
         ApplyMove();
@@ -213,10 +211,6 @@ public class Player : MonoBehaviour, IDamageable
     #endregion
 
     #region ACTIONS
-    public void HandleAllMainActionInputs()
-    {
-        HandleEscapeInput();
-    }
 
     private void MouseClick()
     {
@@ -230,6 +224,10 @@ public class Player : MonoBehaviour, IDamageable
     private void MouseUnclick()
     {
         abilityShoot.StopShoot();
+    }
+    private void Interact()
+    {
+        interactableObj?.Action();
     }
 
     private void UseLifePack()
@@ -246,13 +244,9 @@ public class Player : MonoBehaviour, IDamageable
         abilityShoot.SwitchGun(f);
     }
 
-    private void HandleEscapeInput()
+    private void EscapeInput()
     {
-        if (escapeInput)
-        {
-            escapeInput = false;
-            if (mouse_captured) ReleaseMouse();
-        }
+        if (mouse_captured) ReleaseMouse();
     }
     #endregion
 
