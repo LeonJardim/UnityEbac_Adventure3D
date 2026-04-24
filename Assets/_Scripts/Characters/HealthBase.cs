@@ -7,7 +7,7 @@ public class HealthBase : MonoBehaviour
     public Action OnKill;
     public int startingLife = 10;
     public int currentLife;
-    public bool isDead = false;
+    [HideInInspector] public bool isDead = false;
 
     [SerializeField] private List<UIUpdater> _uiUpdaters;
     [SerializeField] private List<FlashColor> _flashColors;

@@ -4,6 +4,8 @@ using UnityEngine;
 public class Chest : MonoBehaviour, IInteractable
 {
     public GameObject icon;
+    public ChestItem chestItem;
+
     private Animator _animator;
     private string _openTrigger = "Open";
     private string _closeTrigger = "Close";
@@ -21,6 +23,7 @@ public class Chest : MonoBehaviour, IInteractable
         icon.transform.localScale = Vector3.zero;
     }
 
+
     public void Action()
     {
         if (!_open)
@@ -32,17 +35,18 @@ public class Chest : MonoBehaviour, IInteractable
             CloseChest();
         }
     }
-
     private void OpenChest()
     {
         _animator.SetTrigger(_openTrigger);
         _open = true;
+        Invoke(nameof(ShowItem), 0.3f);
     }
     private void CloseChest()
     {
         _animator.SetTrigger(_closeTrigger);
         _open = false;
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -64,5 +68,16 @@ public class Chest : MonoBehaviour, IInteractable
                 p.interactableObj = null;
             }
         }
+    }
+
+
+    private void ShowItem()
+    {
+        chestItem.ShowItem();
+        Invoke(nameof(CollectItem), 0.7f);
+    }
+    private void CollectItem()
+    {
+        chestItem.Collect();
     }
 }
