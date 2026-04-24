@@ -5,17 +5,21 @@ namespace Items
     public class Collectable : MonoBehaviour
     {
         public string tagToCompare = "Player";
-        public ParticleSystem particles;
+        [Header("Effects")]
         public GameObject mesh;
+        public ParticleSystem particles;
         public AudioSource audioSource;
         public float timeToDestroy;
-        private bool _collected = false;
+
+        protected Player player;
+        protected bool _collected = false;
 
         private void OnTriggerEnter(Collider collider)
         {
             if (collider.CompareTag(tagToCompare))
             {
                 if (_collected) return;
+                player = collider.GetComponent<Player>();
                 Collect();
             }
         }

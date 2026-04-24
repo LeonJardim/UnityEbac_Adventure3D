@@ -3,6 +3,8 @@ using DG.Tweening;
 using Items;
 using Leon.PlayerInputs;
 using Leon.StateMachine;
+using Skin;
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IDamageable
@@ -12,6 +14,7 @@ public class Player : MonoBehaviour, IDamageable
 
     [Header("References")]
     public Collider capCollider;
+    [SerializeField] private SkinChanger skinChanger;
     [HideInInspector] public Camera cam;
     [HideInInspector] public AnimationBase animationBase;
     [HideInInspector] public CharacterController characterController;
@@ -41,6 +44,7 @@ public class Player : MonoBehaviour, IDamageable
     [HideInInspector] public IInteractable interactableObj;
     [HideInInspector] public bool mouse_captured = false;
     [HideInInspector] public bool isDead = false;
+    private float _damageMultiplier = 1f;
     private bool _firstTimeDamage = true;
     #endregion
 
@@ -118,7 +122,7 @@ public class Player : MonoBehaviour, IDamageable
     #region HEALTH / DAMAGE
     public void Damage(int amount)
     {
-        _health.TakeDamage(amount);
+        _health.TakeDamage((int)(amount * _damageMultiplier));
         if (_firstTimeDamage && _lifePack.Value > 0)
         {
             _firstTimeDamage = false;
@@ -127,7 +131,7 @@ public class Player : MonoBehaviour, IDamageable
     }
     public void Damage(int amount, Vector3 dir)
     {
-        _health.TakeDamage(amount);
+        _health.TakeDamage((int)(amount * _damageMultiplier));
         if (_firstTimeDamage && _lifePack.Value > 0)
         {
             _firstTimeDamage = false;
@@ -208,6 +212,44 @@ public class Player : MonoBehaviour, IDamageable
         transform.rotation = targetRotation;
     }
     public bool IsOnFloor() => characterController.isGrounded;
+    #endregion
+
+    #region GAMEPLAY EFFECTS
+    public void ChangeSpeed(float speed, float duration)
+    {
+        StartCoroutine(ChangeSpeedCoroutine(speed, duration));
+    }
+    IEnumerator ChangeSpeedCoroutine(float speed, float duration)
+    {
+        var defaultSpeed = moveSpeed;
+        moveSpeed *= speed;
+        yield return new WaitForSeconds(duration);
+        moveSpeed = defaultSpeed;
+    }
+
+
+    public void ChangeTexture(SkinSetup skinSetup, float duration)
+    {
+        StartCoroutine(ChangeTextureCoroutine(skinSetup, duration));
+    }
+    IEnumerator ChangeTextureCoroutine(SkinSetup skinSetup, float duration)
+    {
+        skinChanger.ChangeTexture(skinSetup);
+        yield return new WaitForSeconds(duration);
+        skinChanger.ResetTexture();
+    }
+
+
+    public void ChangeDamageMultiply(float multiplier, float duration)
+    {
+        StartCoroutine(ChangeDamageMultiplyCoroutine(multiplier, duration));
+    }
+    IEnumerator ChangeDamageMultiplyCoroutine(float multiplier, float duration)
+    {
+        _damageMultiplier = multiplier;
+        yield return new WaitForSeconds(duration);
+        _damageMultiplier = 1f;
+    }
     #endregion
 
     #region ACTIONS
