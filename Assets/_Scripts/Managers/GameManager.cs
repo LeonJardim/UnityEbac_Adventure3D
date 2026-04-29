@@ -1,5 +1,6 @@
-using Leon.StateMachine;
 using Leon.Singleton;
+using Leon.StateMachine;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -17,7 +18,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        Init();
+        //Init();
     }
 
     public void Init()
