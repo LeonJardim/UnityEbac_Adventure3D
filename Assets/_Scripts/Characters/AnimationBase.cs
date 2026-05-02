@@ -10,7 +10,9 @@ namespace Animation
         RUN,
         ATTACK,
         DEATH,
-        REVIVE
+        REVIVE,
+        JUMP,
+        LAND,
     }
 
     public class AnimationBase : MonoBehaviour

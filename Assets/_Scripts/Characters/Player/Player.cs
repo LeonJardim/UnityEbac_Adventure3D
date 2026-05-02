@@ -46,6 +46,7 @@ public class Player : MonoBehaviour, IDamageable
     [HideInInspector] public bool isDead = false;
     private float _damageMultiplier = 1f;
     private bool _firstTimeDamage = true;
+    private bool _jumping = false;
     #endregion
 
     #region STATE MACHINE
@@ -172,8 +173,17 @@ public class Player : MonoBehaviour, IDamageable
     #region MOVEMENT
     private void ApplyGravity()
     {
-        if (!IsOnFloor() && _velocity_Y > -1.0f)
-            _velocity_Y -= _gravity * Time.deltaTime;
+        if (!IsOnFloor())
+        {
+            if (_velocity_Y > -1.0f)
+                _velocity_Y -= _gravity * Time.deltaTime;
+        }
+        else if (_jumping)
+        {
+            animationBase.PlayAnimationByTrigger(AnimationType.LAND);
+            _jumping = false;
+        }
+
     }
     private void ApplyMove()
     {
@@ -187,7 +197,9 @@ public class Player : MonoBehaviour, IDamageable
         if (jumpInput && IsOnFloor())
         {
             jumpInput = false;
+            _jumping = true;
             _velocity_Y = jumpForce;
+            animationBase.PlayAnimationByTrigger(AnimationType.JUMP);
         }
     }
     public void HandleGroundMovement()
@@ -214,7 +226,7 @@ public class Player : MonoBehaviour, IDamageable
     public bool IsOnFloor() => characterController.isGrounded;
     #endregion
 
-    #region GAMEPLAY EFFECTS
+    #region GAMEPLAY SKIN POWER EFFECTS
     public void ChangeSpeed(float speed, float duration)
     {
         StartCoroutine(ChangeSpeedCoroutine(speed, duration));
