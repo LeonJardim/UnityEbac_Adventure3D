@@ -15,6 +15,7 @@ public class Player : MonoBehaviour, IDamageable
     [Header("References")]
     public Collider capCollider;
     [SerializeField] private SkinChanger skinChanger;
+    [SerializeField] private ParticleSystem _dustParticles;
     [HideInInspector] public Camera cam;
     [HideInInspector] public AnimationBase animationBase;
     [HideInInspector] public CharacterController characterController;
@@ -115,8 +116,8 @@ public class Player : MonoBehaviour, IDamageable
     private void Update()
     {
         stateMachine.Update();
-        ApplyGravity();
         ApplyMove();
+        ApplyGravity();
     }
 
 
@@ -178,10 +179,14 @@ public class Player : MonoBehaviour, IDamageable
             if (_velocity_Y > -1.0f)
                 _velocity_Y -= _gravity * Time.deltaTime;
         }
-        else if (_jumping)
+        else
         {
-            animationBase.PlayAnimationByTrigger(AnimationType.LAND);
-            _jumping = false;
+            if (_jumping)
+            {
+                animationBase.PlayAnimationByTrigger(AnimationType.LAND);
+                _dustParticles.Play();
+                _jumping = false;
+            }
         }
 
     }
@@ -198,6 +203,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             jumpInput = false;
             _jumping = true;
+            _dustParticles.Stop();
             _velocity_Y = jumpForce;
             animationBase.PlayAnimationByTrigger(AnimationType.JUMP);
         }
