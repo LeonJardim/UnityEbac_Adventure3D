@@ -22,12 +22,12 @@ namespace Enemy
 
         private void Start()
         {
-            _player = FindAnyObjectByType<Player>();
+            Invoke(nameof(GetPlayer), 0.5f);
         }
 
         protected virtual void Update()
         {
-            if (lookAtPlayer)
+            if (lookAtPlayer && _player != null)
             {
                 transform.LookAt(_player.transform.position);
             }
@@ -67,6 +67,11 @@ namespace Enemy
         {
             _health.TakeDamage(amount);
             transform.DOMove(transform.position - dir, 0.2f);
+        }
+
+        private void GetPlayer()
+        {
+            _player = GameManager.Instance.player;
         }
     }
 }

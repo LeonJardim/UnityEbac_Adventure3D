@@ -6,7 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/Protorype.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/_Scenes/SCN_MainMenu.unity
+    guid: e3427c87e36652648a98ba10906d7a6f
+  - enabled: 1
+    path: Assets/_Scenes/SCN_Game.unity
+    guid: 10e5957b4b33c0b4e902e650fcc5edce
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: cb59559bc2e4b094488f572eed978ead, type: 3}

@@ -20,6 +20,7 @@ namespace Items
         private void Start()
         {
             Reset();
+            LoadItemsFromSave();
         }
 
         private void Reset()
@@ -28,6 +29,12 @@ namespace Items
             {
                 i.soInt.Value = 0;
             }
+        }
+
+        private void LoadItemsFromSave()
+        {
+            AddByType(ItemType.COIN, SaveManager.Instance.saveSetup.coins);
+            AddByType(ItemType.LIFE_PACK, SaveManager.Instance.saveSetup.lifePacks);
         }
 
 

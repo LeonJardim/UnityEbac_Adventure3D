@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Boss
 {
@@ -28,6 +29,7 @@ namespace Boss
         public float moveSpeed = 50f;
         public int attackAmount = 5;
         public float timeBetweenAttacks = 0.5f;
+        public UnityEvent onKillEvent;
 
         [Header("Animation")]
         public float startAnimationDuration = 1.0f;
@@ -57,6 +59,7 @@ namespace Boss
             _health.OnKill -= OnKill;
             SwitchState(BossAction.DEATH);
             Destroy(gameObject, 3f);
+            onKillEvent?.Invoke();
         }
         public void Damage(int d)
         {

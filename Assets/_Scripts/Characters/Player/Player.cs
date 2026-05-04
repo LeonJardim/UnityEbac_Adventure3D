@@ -19,7 +19,7 @@ public class Player : MonoBehaviour, IDamageable
     [HideInInspector] public Camera cam;
     [HideInInspector] public AnimationBase animationBase;
     [HideInInspector] public CharacterController characterController;
-    private HealthBase _health;
+    public HealthBase health;
     private Vector3 _initialPosition;
     private SOInt _lifePack;
 
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour, IDamageable
     private void OnEnable() => _input.Player.Enable();
     private void OnDisable() => _input.Player.Disable();
     private void OnDestroy() => _input.Dispose();
-    
+
     private void PerformInputs()
     {
         _input = new PlayerInputs();
@@ -107,8 +107,9 @@ public class Player : MonoBehaviour, IDamageable
         animationBase = GetComponent<AnimationBase>();
         characterController = GetComponent<CharacterController>();
         _lifePack = ItemManager.Instance.GetItemByType(ItemType.LIFE_PACK).soInt;
-        _health = GetComponent<HealthBase>();
-        if (_health != null) _health.OnKill += OnKill;
+        health = GetComponent<HealthBase>();
+        if (health != null) health.OnKill += OnKill;
+        health.SetHealth(SaveManager.Instance.saveSetup.health);
         _initialPosition = transform.position;
         StateMachineInit();
     }
@@ -124,7 +125,7 @@ public class Player : MonoBehaviour, IDamageable
     #region HEALTH / DAMAGE
     public void Damage(int amount)
     {
-        _health.TakeDamage((int)(amount * _damageMultiplier));
+        health.TakeDamage((int)(amount * _damageMultiplier));
         if (_firstTimeDamage && _lifePack.Value > 0)
         {
             _firstTimeDamage = false;
@@ -133,7 +134,7 @@ public class Player : MonoBehaviour, IDamageable
     }
     public void Damage(int amount, Vector3 dir)
     {
-        _health.TakeDamage((int)(amount * _damageMultiplier));
+        health.TakeDamage((int)(amount * _damageMultiplier));
         if (_firstTimeDamage && _lifePack.Value > 0)
         {
             _firstTimeDamage = false;
@@ -149,15 +150,15 @@ public class Player : MonoBehaviour, IDamageable
 
     private void OnKill()
     {
-        _health.OnKill -= OnKill;
+        health.OnKill -= OnKill;
         stateMachine.SwitchState(PlayerStates.DEAD);
         Invoke(nameof(Respawn), 3f);
     }
 
     public void Respawn()
     {
-        _health.OnKill += OnKill;
-        _health.ResetLife();
+        health.OnKill += OnKill;
+        health.ResetLife();
         stateMachine.SwitchState(PlayerStates.IDLE);
         animationBase.PlayAnimationByTrigger(AnimationType.REVIVE);
         if (CheckPointManager.Instance.HasCheckPoint())
@@ -292,10 +293,10 @@ public class Player : MonoBehaviour, IDamageable
 
     private void UseLifePack()
     {
-        if (_lifePack.Value > 0 && _health.currentLife < _health.startingLife)
+        if (_lifePack.Value > 0 && health.currentLife < health.startingLife)
         {
             ItemManager.Instance.RemoveByType(ItemType.LIFE_PACK);
-            _health.Heal(_health.startingLife / 2);
+            health.Heal(health.startingLife / 2);
         }
     }
 

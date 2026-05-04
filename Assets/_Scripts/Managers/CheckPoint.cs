@@ -6,32 +6,31 @@ public class CheckPoint : MonoBehaviour
     public int key = 1;
 
     private bool _activeCheckpoint = false;
-    private string _checkcpointKey = "CheckpointKey";
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!_activeCheckpoint && other.CompareTag("Player"))
+        Player P = other.GetComponent<Player>();
+
+        if (!_activeCheckpoint && P != null)
         {
-            CheckCheckpoint();
+            CheckCheckpoint(P.health.currentLife);
         }
     }
 
-    private void CheckCheckpoint()
+    private void CheckCheckpoint(int playerHealth)
     {
         TurnItOn();
-        SaveCheckPoint();
-    }
+        SaveManager.Instance.SaveCheckpoint(key, playerHealth);
 
-    private void SaveCheckPoint()
-    {
-        if (PlayerPrefs.GetInt(_checkcpointKey, 0) > key) return;
+        if (SaveManager.Instance.saveSetup.lastCheckpoint >= key) return;
 
-        PlayerPrefs.SetInt(_checkcpointKey, key);
         _activeCheckpoint = true;
         CheckPointManager.Instance.SaveCheckPoint(key);
     }
 
-    private void TurnItOn()
+
+
+    public void TurnItOn()
     {
         meshRenderer.material.SetColor("_EmissionColor", Color.white);
     }
