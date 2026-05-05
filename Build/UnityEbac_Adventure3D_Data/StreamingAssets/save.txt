@@ -1,0 +1,7 @@
+{
+    "lastCheckpoint": 0,
+    "coins": 0,
+    "health": 15,
+    "lifePacks": 0,
+    "playerName": "Leo"
+}
