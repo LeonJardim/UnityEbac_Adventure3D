@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectableCoin
   tagToCompare: Player
-  particles: {fileID: 0}
   mesh: {fileID: 0}
-  audioSource: {fileID: 0}
+  particles: {fileID: 0}
+  sfx: 2
   timeToDestroy: 0
   myType: 1
 --- !u!135 &7415554532990370430

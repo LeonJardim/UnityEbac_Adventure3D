@@ -8,8 +8,9 @@ public class CheckPointManager : Singleton<CheckPointManager>
 
     public List<CheckPoint> checkPoints;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         SaveCheckPoint(SaveManager.Instance.saveSetup.lastCheckpoint);
     }
 

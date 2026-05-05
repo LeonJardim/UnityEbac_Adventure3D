@@ -160,7 +160,7 @@ MonoBehaviour:
   tagToCompare: Player
   mesh: {fileID: 0}
   particles: {fileID: 0}
-  audioSource: {fileID: 0}
+  sfx: 3
   timeToDestroy: 0
   skinType: 2
   duration: 3

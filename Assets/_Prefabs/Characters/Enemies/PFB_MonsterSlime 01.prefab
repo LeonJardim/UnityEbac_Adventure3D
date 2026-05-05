@@ -709,6 +709,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.15
+  colorParameter: _EmissionColor
 --- !u!1 &4832297790992149851
 GameObject:
   m_ObjectHideFlags: 0
@@ -6099,10 +6100,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBase
   startingLife: 20
+  currentLife: 0
   isDead: 0
-  _flashColor: {fileID: 0}
+  uiUpdaters: []
   _flashColors: []
+  _flashColor: {fileID: 0}
   _particleSystem: {fileID: 0}
+  sfx: 5
 --- !u!114 &3283100209869353343
 MonoBehaviour:
   m_ObjectHideFlags: 0

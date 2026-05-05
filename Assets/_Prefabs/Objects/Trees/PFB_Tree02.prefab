@@ -73,6 +73,7 @@ MonoBehaviour:
   _flashColors: []
   _flashColor: {fileID: 0}
   _particleSystem: {fileID: 0}
+  sfx: 6
 --- !u!65 &2717038049498822735
 BoxCollider:
   m_ObjectHideFlags: 0

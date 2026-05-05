@@ -21,7 +21,7 @@ public class SaveManager : Singleton<SaveManager>
 
     private void Start()
     {
-        Invoke(nameof(Load), .1f);
+        Invoke(nameof(Load), .2f);
     }
 
     #region LOAD

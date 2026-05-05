@@ -1677,6 +1677,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   animationBase: {fileID: 0}
   characterController: {fileID: 0}
+  health: {fileID: 0}
   moveSpeed: 20
   jumpForce: 2
   _modelRotationSpeed: 15
@@ -1701,7 +1702,7 @@ MonoBehaviour:
   startingLife: 15
   currentLife: 0
   isDead: 0
-  _uiUpdaters: []
+  uiUpdaters: []
   _flashColors:
   - {fileID: 1166220877095309287}
   - {fileID: 8918199556012179456}
@@ -1709,6 +1710,7 @@ MonoBehaviour:
   - {fileID: 4243541758213322174}
   _flashColor: {fileID: 0}
   _particleSystem: {fileID: 0}
+  sfx: 4
 --- !u!114 &801962428114988984
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class HealthBase : MonoBehaviour
     [SerializeField] private List<FlashColor> _flashColors;
     [SerializeField] private FlashColor _flashColor;
     [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private SFXType sfx;
+
 
 
     private void Awake()
@@ -37,6 +39,7 @@ public class HealthBase : MonoBehaviour
         if (_flashColor != null) _flashColor.Flash();
         _flashColors?.ForEach(i => i.Flash());
         if (_particleSystem != null) _particleSystem.Play();
+        if (sfx != SFXType.NONE) SoundManager.Instance.PlaySFXByType(sfx);
     }
 
     public void Heal(int heal)

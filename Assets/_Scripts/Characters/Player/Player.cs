@@ -275,6 +275,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void MouseClick()
     {
+        if (GameManager.Instance.gamePaused) return;
         if (!mouse_captured) CaptureMouse();
         else if (isDead) return;
         else
@@ -307,7 +308,17 @@ public class Player : MonoBehaviour, IDamageable
 
     private void EscapeInput()
     {
-        if (mouse_captured) ReleaseMouse();
+        if (mouse_captured)
+        {
+            ReleaseMouse();
+            GameManager.Instance.PauseGame();
+        }
+        else
+        {
+            CaptureMouse();
+            GameManager.Instance.UnPauseGame();
+        }
+            
     }
     #endregion
 

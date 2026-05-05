@@ -24,15 +24,18 @@ public class GameManager : Singleton<GameManager>
     public Transform defaultSpawnPoint;
 
     public CinemachineCamera mainCamera;
+    public GameObject pauseMenu;
 
     [HideInInspector] public Player player;
+    [HideInInspector] public bool gamePaused;
+    
 
     private void Start()
     {
         //Init();
         if (playerPFB != null)
         {
-            Invoke(nameof(SpawnPlayer), 0.2f);
+            Invoke(nameof(SpawnPlayer), 0.1f);
         }
     }
 
@@ -55,7 +58,9 @@ public class GameManager : Singleton<GameManager>
         var obj = Instantiate(playerPFB);
         if (CheckPointManager.Instance.lastCheckPointKey > 0)
         {
-            obj.transform.position = CheckPointManager.Instance.GetPositionFromLastCheckpoint();
+            Vector3 vec = CheckPointManager.Instance.GetPositionFromLastCheckpoint();
+            if (vec != Vector3.zero) obj.transform.position = vec;
+            else obj.transform.position = defaultSpawnPoint.position;
         }
         else
         {
@@ -76,6 +81,19 @@ public class GameManager : Singleton<GameManager>
 
         mainCamera.Target.TrackingTarget = obj.transform;
         player = obj;
+    }
+
+    public void PauseGame()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0.1f;
+        gamePaused = true;
+    }
+    public void UnPauseGame()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+        gamePaused = false;
     }
 
     public void EndGame()

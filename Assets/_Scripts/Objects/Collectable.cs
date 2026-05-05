@@ -8,7 +8,7 @@ namespace Items
         [Header("Effects")]
         public GameObject mesh;
         public ParticleSystem particles;
-        public AudioSource audioSource;
+        public SFXType sfx;
         public float timeToDestroy;
 
         protected Player player;
@@ -35,7 +35,7 @@ namespace Items
         {
             if (particles != null) particles.Play();
             if (mesh != null) mesh.SetActive(false);
-            if (audioSource != null) audioSource.Play();
+            if (sfx != SFXType.NONE) SoundManager.Instance.PlaySFXByType(sfx);
         }
 
         private void DestroyMe()

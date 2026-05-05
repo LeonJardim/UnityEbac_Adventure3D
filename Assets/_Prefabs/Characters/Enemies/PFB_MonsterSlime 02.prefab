@@ -5718,10 +5718,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBase
   startingLife: 15
+  currentLife: 0
   isDead: 0
-  _flashColor: {fileID: 0}
+  uiUpdaters: []
   _flashColors: []
+  _flashColor: {fileID: 0}
   _particleSystem: {fileID: 0}
+  sfx: 5
 --- !u!114 &141741049939317354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6057,6 +6060,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.15
+  colorParameter: _EmissionColor
 --- !u!1 &8996436052689390839
 GameObject:
   m_ObjectHideFlags: 0

@@ -54,7 +54,7 @@ public class FXManager : Singleton<FXManager>
 
     public void ScreenShake()
     {
-        StartCoroutine(ScreenShakeCoroutine());
+        //StartCoroutine(ScreenShakeCoroutine());
     }
     IEnumerator ScreenShakeCoroutine()
     {
